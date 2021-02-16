@@ -262,43 +262,15 @@ export default class CodeFlask {
 
   handleSelfClosingCharacters (e) {
     if (!this.opts.handleSelfClosingCharacters) return
-    const openChars = ['(', '[', '{', '<', '\'', '"']
-    const closeChars = [')', ']', '}', '>', '\'', '"']
+    const openChars = this.opts.selfClosingCharacters && this.opts.selfClosingCharacters.open || ['(', '[', '{', '<', '\'', '"']
+    const closeChars = this.opts.selfClosingCharacters && this.opts.selfClosingCharacters.close || [')', ']', '}', '>', '\'', '"']
     const key = e.key
 
     if (!openChars.includes(key) && !closeChars.includes(key)) {
       return
     }
 
-    switch (key) {
-      case '(':
-      case ')':
-        this.closeCharacter(key)
-        break
-
-      case '[':
-      case ']':
-        this.closeCharacter(key)
-        break
-
-      case '{':
-      case '}':
-        this.closeCharacter(key)
-        break
-
-      case '<':
-      case '>':
-        this.closeCharacter(key)
-        break
-
-      case '\'':
-        this.closeCharacter(key)
-        break
-
-      case '"':
-        this.closeCharacter(key)
-        break
-    }
+    this.closeCharacter(key)
   }
 
   setLineNumber () {
